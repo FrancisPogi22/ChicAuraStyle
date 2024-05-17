@@ -16,8 +16,7 @@
                     @forelse ($orders as $order)
                         <div class="order-widget">
                             <input type="checkbox" class="order-checkbox" data-price="{{ $order->totalPrice }}">
-                            <img src="{{ asset('assets/img/' . ($order->categoryID == 1 ? 'Dress.avif' : ($order->categoryID == 2 ? 'Shoes.avif' : 'Bag.jpg'))) }}"
-                                alt="Image">
+                            <img src="/product_img/{{ $order->image }}" alt="Image">
                             <input type="number" class="quantity" value="{{ $order->quantity }}"
                                 data-product-id="{{ $order->productID }}" hidden>
                             <div class="order-details">
@@ -79,16 +78,14 @@
     @include('partials.toastr')
     <script>
         $(document).ready(function() {
-                function calculateTotalPrice() {
-                    let total = 0;
-                    $('.order-checkbox:checked').each(function() {
-                        let price = parseFloat($(this).data('price'));
-                        let quantity = parseInt($(this).siblings('.quantity').val());
-                        let itemTotal = price * quantity;
-                        total += itemTotal;
-                    });
-                    $('#total-price').text(total.toFixed(2));
-                }
+            function calculateTotalPrice() {
+                let total = 0;
+
+                $('.order-checkbox:checked').each(function() {
+                    total += parseFloat($(this).data('price'));
+                });
+                $('#total-price').text(total.toFixed(2));
+            }
 
             $('.order-checkbox, .quantity').change(calculateTotalPrice);
 
@@ -109,7 +106,6 @@
                 }
 
                 $('#productIDs').val(selectedProductIDs.join(','));
-
                 this.submit();
             });
 

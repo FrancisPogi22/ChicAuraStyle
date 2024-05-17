@@ -28,6 +28,27 @@
                 </div>
                 <div class="products-widget-con">
                 </div>
+                <div class="modal fade modal-lg" id="viewModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img id="productImage" src="" alt="Image">
+                                <div class="product-details-con">
+                                    <div class="product-details">
+                                        <h3 id="productName"></h3>
+                                        <p id="productDescription"></p>
+                                    </div>
+                                    <p id="productPrice"></p>
+                                    <button id="addProduct">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -78,6 +99,23 @@
                 $('#orderModal').modal('show');
             });
 
+            $(document).on('click', '#addProduct', function() {
+                let productId = $(this).data('id');
+
+                $('#productID').val(productId);
+                $('#viewModal').modal('hide');
+                $('#orderModal').modal('show');
+            });
+
+            $(document).on('click', '.viewModalBtn', function() {
+                $('#productImage').attr('src', `/product_img/${$(this).data('img')}`);
+                $('#productName').text($(this).data('name'));
+                $('#productDescription').text($(this).data('description'));
+                $('#productPrice').text("₱ " + $(this).data('price'));
+                $('#addProduct').attr('data-id', $(this).data('id'));
+                $('#viewModal').modal('show');
+            });
+
             function getProductByPrice() {
                 let selectedPrice = $("#price").val();
 
@@ -93,6 +131,9 @@
                         response.products.forEach(product => {
                             $('.products-widget-con').append(`
                                 <div class="products-widget">
+                                    <button class="viewModalBtn" data-id="${product.productID}" data-img="${product.image}" data-name="${product.name}" data-description="${product.description}" data-price="${product.price}">
+                                        View
+                                    </button>
                                     <img src="{{ '/product_img/${product.image}' }}" alt="Image">
                                     <div class="widget-details">
                                         <h5>${product.name}</h5>
@@ -125,6 +166,9 @@
                         response.products.forEach(product => {
                             $('.products-widget-con').append(`
                                 <div class="products-widget">
+                                    <button type="button" class="viewModalBtn" data-id="${product.productID}" data-img="${product.image}" data-name="${product.name}" data-description="${product.description}" data-price="${product.price}" data-bs-toggle="modal" data-bs-target="#viewModal">
+                                        View
+                                    </button>
                                     <img src="{{ '/product_img/${product.image}' }}" alt="Image">
                                     <div class="widget-details">
                                         <h5>${product.name}</h5>
@@ -150,6 +194,9 @@
                         response.products.forEach(product => {
                             $('.products-widget-con').append(`
                                 <div class="products-widget">
+                                    <button type="button" class="viewModalBtn" data-id="${product.productID}" data-img="${product.image}" data-name="${product.name}" data-description="${product.description}" data-price="${product.price}" data-bs-toggle="modal" data-bs-target="#viewModal">
+                                        View
+                                    </button>
                                     <img src="{{ '/product_img/${product.image}' }}" alt="Image">
                                     <div class="widget-details">
                                         <h5>${product.name}</h5>

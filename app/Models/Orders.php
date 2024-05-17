@@ -9,6 +9,8 @@ class Orders extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'orderID';
+
     protected $fillable = [
         'userID',
         'productID',
@@ -19,5 +21,4 @@ class Orders extends Model
     ];
 
     public $timestamps = false;
-    
 }

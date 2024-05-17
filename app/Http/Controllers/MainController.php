@@ -34,7 +34,7 @@ class MainController extends Controller
         $orders = Orders::where('userID', auth()->user()->id)
             ->join('products', 'orders.productID', '=', 'products.productID')
             ->join('categories', 'products.categoryID', '=', 'categories.categoryID')
-            ->select('orders.*', 'products.name as name', 'products.description as description', 'categories.categoryID as categoryID')
+            ->select('orders.*', 'products.name as name', 'products.description as description', 'products.image as image', 'categories.categoryID as categoryID')
             ->where('status', 'Pending')
             ->get();
 
@@ -119,7 +119,7 @@ class MainController extends Controller
     public function removeProduct(Request $request)
     {
         $product = $this->products->where('productID', $request->id)->first();
-        
+
         $image = $product->image;
 
         if ($image) {
@@ -164,19 +164,33 @@ class MainController extends Controller
 
         if ($validation->fails()) return back()->withInput()->with('warning', implode('<br>', $validation->errors()->all()));
 
-        $products = Products::where('productID', $request->productID)->first();
+        $order = Orders::where('productID', $request->productID)
+            ->where('userID', auth()->user()->id)
+            ->first();
 
-        if ($products) {
-            Orders::create([
-                'quantity' => $request->quantity,
-                'totalPrice' => $products->price,
-                'orderDate' => now(),
-                'status' => "Pending",
-                'userID' => auth()->user()->id,
-                'productID' => $request->productID,
-            ]);
+        if ($order) {
+            $order->quantity += $request->quantity;
+            $order->totalPrice = $order->quantity * $order->totalPrice;
+            $order->save();
 
-            return back()->with('success', "Successfully Ordered.");
+            return back()->with('success', "Order updated successfully.");
+        } else {
+            $product = Products::where('productID', $request->productID)->first();
+
+            if ($product) {
+                Orders::create([
+                    'quantity' => $request->quantity,
+                    'totalPrice' => $product->price * $request->quantity,
+                    'orderDate' => now(),
+                    'status' => "Pending",
+                    'userID' => auth()->user()->id,
+                    'productID' => $request->productID,
+                ]);
+
+                return back()->with('success', "Successfully ordered.");
+            }
+
+            return back()->with('error', "Product not found.");
         }
     }
 
@@ -185,6 +199,6 @@ class MainController extends Controller
         $productIDs = $request->productIDs;
         $productIDsArray = explode(',', $productIDs);
         Orders::where('userID', auth()->user()->id)->whereIn('productID', $productIDsArray)->update(['status' => 'Completed']);
-        return redirect()->back()->with('success', 'Products checked out successfully.');
+        return redirect()->back()->with('success', 'Product/s checked out successfully.');
     }
 }
