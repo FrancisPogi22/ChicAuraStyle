@@ -1,0 +1,107 @@
+#register .register-con {
+    padding: 250px 0;
+    display: flex;
+    justify-content: center;
+    column-gap: 100px;
+}
+
+#register .wrapper {
+    max-width: 1440px;
+}
+
+#register .register-details-con {
+    max-width: 600px;
+    width: 100%;
+}
+
+#register .register-con form {
+    max-width: 400px;
+    width: 100%;
+    background: var(--global-color-white);
+    border-radius: 10px;
+    padding: 20px;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+        drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+#register form input {
+    font-size: 14px;
+    padding-left: 35px;
+}
+
+#register .password-toggle,
+#register .field-con {
+    position: relative;
+}
+
+#register .field-con i {
+    position: absolute;
+}
+
+#register .field-con i:first-of-type {
+    left: 10px;
+    top: 7px;
+}
+
+#register .field-con.password-toggle i:last-of-type,
+#register .field-con.Cpassword-toggle i:last-of-type {
+    right: 10px;
+    cursor: pointer;
+    top: 7px;
+}
+
+#register form input {
+    font-size: 14px;
+    padding-left: 35px;
+}
+
+#register .profile-field input {
+    padding: 0.375rem 0.75rem;
+    font-size: 12px;
+    color: #888888;
+}
+
+#register .register-details-con h2 {
+    font-size: 50px;
+}
+
+@media screen and (max-width: 767px) {
+    #register .register-details-con p {
+        font-size: 12px;
+    }
+
+    #register .register-details-con h2 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #register .register-con {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #register .register-details-con {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    #register .register-details-con p {
+        font-size: 14px;
+    }
+
+    #register .register-con form {
+        margin: 0 auto;
+    }
+
+    #register .register-details-con h2 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 1140px) {
+    #register .register-con {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}

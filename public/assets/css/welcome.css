@@ -1,0 +1,106 @@
+#welcome .welcome-con {
+    padding: 250px 0;
+    display: flex;
+    justify-content: center;
+    column-gap: 100px;
+}
+
+#welcome .wrapper {
+    max-width: 1440px;
+}
+
+#welcome .welcome-details-con {
+    max-width: 600px;
+    width: 100%;
+}
+
+#welcome .welcome-form-con {
+    background: var(--global-color-white);
+    padding: 20px;
+    border-radius: 10px;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+        drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+    max-width: 400px;
+    width: 100%;
+}
+
+#welcome .password-toggle {
+    position: relative;
+}
+
+#welcome .welcome-form-con input {
+    font-size: 14px;
+    padding-left: 35px;
+}
+
+#welcome .password-toggle #toggle-password {
+    right: 10px;
+    cursor: pointer;
+    top: 7px;
+}
+
+#welcome .field-con i {
+    position: absolute;
+}
+
+#welcome .field-con:first-of-type i {
+    left: 32px;
+    top: 26px;
+}
+
+#welcome .password-toggle i:first-of-type {
+    left: 12px;
+    top: 7px;
+}
+
+#welcome .welcome-form-con a {
+    font-size: 12px;
+    text-align: right;
+    text-decoration: underline !important;
+    font-style: italic;
+}
+
+#welcome .welcome-details-con h2 {
+    font-size: 50px;
+}
+
+@media screen and (max-width: 767px) {
+    #welcome .welcome-details-con p {
+        font-size: 12px;
+    }
+
+    #welcome .welcome-details-con h2 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #welcome .welcome-con {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #welcome .welcome-details-con {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    #welcome .welcome-details-con p {
+        font-size: 14px;
+    }
+
+    #welcome .welcome-form-con {
+        margin: 0 auto;
+    }
+
+    #welcome .welcome-details-con h2 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 1140px) {
+    #welcome .welcome-con {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
