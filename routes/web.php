@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/removeProduct', 'removeProduct')->name('remove.product');
         Route::post('/updateProduct', 'updateProduct')->name('product.update');
         Route::post('/addProduct', 'addProduct')->name('product.add');
+        Route::put('/updateQuantity', 'updateQuantity')->name('update.quantity');
     });
     
 

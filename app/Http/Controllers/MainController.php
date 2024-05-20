@@ -41,6 +41,29 @@ class MainController extends Controller
         return view('userpages.order', compact("orders"));
     }
 
+    public function updateQuantity(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'id' => 'required|exists:orders,orderID',
+            'quantity' => 'required|integer|min:0'
+        ]);
+
+        if ($validation->fails()) {
+            return response()->json(['status' => 'warning', 'message' => implode('<br>', $validation->errors()->all())]);
+        }
+
+        $order = Orders::where('orderID', $request->id)->first();
+
+        if (!$order) {
+            return response(['status' => 'warning', 'message' => 'Order not found']);
+        }
+
+        $order->quantity = $request->quantity;
+        $order->save();
+
+        return response(['status' => 'success', 'message' => 'Order quantity updated successfully']);
+    }
+
     public function products()
     {
         $products = Products::all();

@@ -41,18 +41,18 @@
                     <div class="field-con">
                         <i class="bi bi-card-text"></i>
                         <input type="text" name="address" class="form-control"
-                            value="{{ !empty(old('address')) ? old('address') : null }}" placeholder="Address">
+                            value="{{ !empty(old('address')) ? old('address') : null }}" placeholder="Address" required>
                     </div>
                     <div class="field-con password-toggle">
                         <i class="bi bi-key"></i>
                         <input type="password" name="password" id="authPassword" class="form-control"
-                            placeholder="Password">
+                            placeholder="Password" min="8" required>
                         <i class="bi bi-eye-slash" id="toggle-password"></i>
                     </div>
                     <div class="field-con Cpassword-toggle">
                         <i class="bi bi-shield-lock"></i>
                         <input type="password" name="Cpassword" id="authCPassword" class="form-control"
-                            placeholder="Password">
+                            placeholder="Password" required>
                         <i class="bi bi-eye-slash" id="toggle-Cpassword"></i>
                     </div>
                     <div class="btn-con">

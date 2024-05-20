@@ -53,10 +53,6 @@ h2 {
     color: var(--global-color-white);
 }
 
-/* .dark:hover {
-    background: #15803d;
-} */
-
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
@@ -196,20 +192,11 @@ p {
     }
 }
 
+.toast-info,
+.toast-warning,
+.toast-error,
 .toast-success {
     background: #ded0b6;
-}
-
-.toast-error {
-    background: var(--color-red);
-}
-
-.toast-info {
-    background: var(--color-primary);
-}
-
-.toast-warning {
-    background: var(--color-yellow-hover);
 }
 
 .toast {

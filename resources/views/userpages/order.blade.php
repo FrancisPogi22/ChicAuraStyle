@@ -17,11 +17,15 @@
                         <div class="order-widget">
                             <input type="checkbox" class="order-checkbox" data-price="{{ $order->totalPrice }}">
                             <img src="/product_img/{{ $order->image }}" alt="Image">
-                            <input type="number" class="quantity" value="{{ $order->quantity }}"
-                                data-product-id="{{ $order->productID }}" hidden>
                             <div class="order-details">
                                 <h6>{{ $order->name }}</h6>
                                 <p>{{ $order->description }}</p>
+                                <div class="quantity-con">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="number" class="form-control quantity" name="quantity"
+                                        data-product-id="{{ $order->productID }}" value="{{ $order->quantity }}"
+                                        placeholder="Quantity" required>
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -86,6 +90,34 @@
                 });
                 $('#total-price').text(total.toFixed(2));
             }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.quantity').on('change', function() {
+                let orderId = $(this).data('product-id');
+                let newQuantity = $(this).val();
+
+                $.ajax({
+                    url: "{{ route('update.quantity') }}",
+                    type: "PUT",
+                    data: {
+                        id: orderId,
+                        quantity: newQuantity
+                    },
+                    success: function(response) {
+                        if (response.status == "warning") {
+                            showWarningMessage(response.message);
+                        }
+                    },
+                    error: function(response) {
+                        showWarningMessage('An error occurred while updating the quantity.');
+                    }
+                });
+            });
 
             $('.order-checkbox, .quantity').change(calculateTotalPrice);
 

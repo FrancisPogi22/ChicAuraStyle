@@ -23,6 +23,10 @@ h2 {
     object-fit: contain;
 }
 
+.quantity-con label{
+    font-size: 12px;
+}
+
 .checkout-con {
     display: flex;
     justify-content: end;

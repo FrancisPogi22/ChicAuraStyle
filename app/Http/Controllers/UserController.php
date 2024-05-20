@@ -36,8 +36,8 @@ class UserController extends Controller
         $validation = Validator::make($request->all(), [
             'username' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'type'=> 'required',
+            'password' => 'required|min:8',
+            'type' => 'required',
             'address' => 'required',
             'Cpassword' => 'required|same:password'
         ]);
