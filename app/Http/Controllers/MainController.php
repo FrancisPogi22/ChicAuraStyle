@@ -166,6 +166,7 @@ class MainController extends Controller
 
         $order = Orders::where('productID', $request->productID)
             ->where('userID', auth()->user()->id)
+            ->where('status', 'Pending')
             ->first();
 
         if ($order) {

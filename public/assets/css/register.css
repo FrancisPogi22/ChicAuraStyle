@@ -50,12 +50,13 @@
     top: 7px;
 }
 
-#register form input {
+#register form input,
+#register form select {
     font-size: 14px;
     padding-left: 35px;
 }
 
-#register .profile-field input {
+#register .profile-field input { 
     padding: 0.375rem 0.75rem;
     font-size: 12px;
     color: #888888;

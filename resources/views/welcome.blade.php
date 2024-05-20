@@ -24,7 +24,7 @@
                             <i class="bi bi-person"></i>
                             <input type="text" name="email"
                                 value="{{ !empty(old('email')) ? old('email') : null }}" class="form-control"
-                                placeholder="Username" required>
+                                placeholder="Email" required>
                         </div>
                         <div class="field-con password-toggle">
                             <i class="bi bi-key"></i>

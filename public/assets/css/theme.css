@@ -58,7 +58,8 @@ h2 {
 } */
 
 input::placeholder,
-textarea::placeholder {
+textarea::placeholder,
+select::placeholder {
     font-size: 12px;
 }
 

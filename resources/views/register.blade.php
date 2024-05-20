@@ -20,6 +20,14 @@
                 <form action="{{ route('register.user') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="field-con">
+                        <i class="bi bi-tag"></i>
+                        <select name="type" class="form-control">
+                            <option value="" selected hidden disabled>Select Type</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Customer</option>
+                        </select>
+                    </div>
+                    <div class="field-con">
                         <i class="bi bi-person"></i>
                         <input type="text" name="username" class="form-control"
                             value="{{ !empty(old('username')) ? old('username') : null }}" placeholder="Username"

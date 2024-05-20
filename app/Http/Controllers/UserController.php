@@ -37,6 +37,7 @@ class UserController extends Controller
             'username' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
+            'type'=> 'required',
             'address' => 'required',
             'Cpassword' => 'required|same:password'
         ]);
@@ -47,6 +48,7 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'address' => $request->address,
+            'type' => $request->type,
             'password' => Hash::make($request->password),
         ]);
 
