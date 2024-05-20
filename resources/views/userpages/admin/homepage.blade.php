@@ -25,14 +25,15 @@
                             <option value="Low">Low to High</option>
                         </select>
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#addProduct">
+                            data-bs-target="#addProducts">
                             Add
                         </button>
                     </div>
                 </div>
                 <div class="products-widget-con">
                 </div>
-                <div class="modal fade" id="addProduct" tabindex="-1" aria-hidden="true">
+                <div class="modal fade" id="addProducts" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -45,7 +46,8 @@
                                 <div class="modal-body">
                                     <div class="field-con">
                                         <select name="category" class="form-control">
-                                            <option value="" disabled selected hidden>Select Category</option>
+                                            <option value="" disabled selected hidden>Select Category
+                                            </option>
                                             <option value="1">Dresses</option>
                                             <option value="3">Bags</option>
                                             <option value="2">Shoes</option>
@@ -108,6 +110,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade modal-lg" id="viewModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img id="productImage" src="" alt="Image">
+                                <div class="product-details-con">
+                                    <div class="product-details">
+                                        <h3 id="productName"></h3>
+                                        <p id="productDescription"></p>
+                                    </div>
+                                    <p id="viewProductPrice"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -131,6 +153,15 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            });
+
+            $(document).on('click', '.viewModalBtn', function() {
+                $('#productImage').attr('src', `/product_img/${$(this).data('img')}`);
+                $('#productName').text($(this).data('name'));
+                $('#productDescription').text($(this).data('description'));
+                $('#viewProductPrice').text("₱ " + $(this).data('price'));
+                $('#addProduct').attr('data-id', $(this).data('id'));
+                $('#viewModal').modal('show');
             });
 
             $(document).on('click', '.removeProduct', function() {
@@ -179,6 +210,9 @@
                         response.products.forEach(product => {
                             $('.products-widget-con').append(`
                                 <div class="products-widget">
+                                    <button class="viewModalBtn" data-id="${product.productID}" data-img="${product.image}" data-name="${product.name}" data-description="${product.description}" data-price="${product.price}">
+                                        View
+                                    </button>
                                     <img src="{{ '/product_img/${product.image}' }}" alt="Image">
                                     <div class="widget-details">
                                         <h5>${product.name}</h5>
@@ -214,6 +248,9 @@
                         response.products.forEach(product => {
                             $('.products-widget-con').append(`
                                 <div class="products-widget">
+                                    <button class="viewModalBtn" data-id="${product.productID}" data-img="${product.image}" data-name="${product.name}" data-description="${product.description}" data-price="${product.price}">
+                                        View
+                                    </button>
                                     <img src="{{ '/product_img/${product.image}' }}" alt="Image">
                                     <div class="widget-details">
                                         <h5>${product.name}</h5>
@@ -242,6 +279,9 @@
                         response.products.forEach(product => {
                             $('.products-widget-con').append(`
                                 <div class="products-widget">
+                                    <button class="viewModalBtn" data-id="${product.productID}" data-img="${product.image}" data-name="${product.name}" data-description="${product.description}" data-price="${product.price}">
+                                        View
+                                    </button>
                                     <img src="{{ '/product_img/${product.image}' }}" alt="Image">
                                     <div class="widget-details">
                                         <h5>${product.name}</h5>

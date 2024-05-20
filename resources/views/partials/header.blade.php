@@ -1,9 +1,6 @@
 <section id="header">
     <div class="wrapper">
         <div class="header-con">
-            {{-- <a href="{{ route('welcome') }}" class="logo">
-                <img src="" alt="">
-            </a> --}}
             <ul class="navbar">
                 @guest
                     <li>
@@ -32,7 +29,6 @@
                             <a href="{{ route('logout') }}">Logout</a>
                         </li>
                     @endif
-
                 @endauth
             </ul>
             <button class="mobile-btn">
